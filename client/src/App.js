@@ -1,32 +1,25 @@
-// import { IonButton, IonIcon } from '@ionic/react'
-
-// /* Core CSS required for Ionic components to work properly */
-// import '@ionic/react/css/core.css'
-
-// /* Basic CSS for apps built with Ionic */
-// import '@ionic/react/css/normalize.css'
-// import '@ionic/react/css/structure.css'
-// import '@ionic/react/css/typography.css'
-
-// /* Optional CSS utils that can be commented out */
-// import '@ionic/react/css/padding.css'
-// import '@ionic/react/css/float-elements.css'
-// import '@ionic/react/css/text-alignment.css'
-// import '@ionic/react/css/text-transformation.css'
-// import '@ionic/react/css/flex-utils.css'
-// import '@ionic/react/css/display.css'
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Layout from './pages/Layout'
+import Profile from './pages/Profile'
+import Register from './pages/Register'
+import ProtectedRoute from './pages/ProtectedRoute'
 function App() {
   return (
-    <div>
-      <h1>
-        react app
-        {/* <IonIcon icon={images}></IonIcon> */}
-        {/* <IonButton color={'danger'} fill='outline' slot='end'> */}
-        view
-        {/* </IonButton> */}
-      </h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path='/'
+          element={
+            <ProtectedRoute>
+              <Layout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<Profile />} />
+        </Route>
+        <Route path='/register' element={<Register />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

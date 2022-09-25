@@ -1,1 +1,94 @@
- 
+:root {
+  --t-100: all 0.2s ease-in-out;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: min(100% - 1em, 1000px);
+  background-color: #fff;
+  color: #000;
+  font-size: 12px;
+  line-height: 1.2;
+  margin-inline: auto;
+  text-align: center;
+}
+/* register page */
+/* input */
+.input-controler {
+  width: min(100%, 400px);
+  background-color: #eee;
+  color: #000;
+  border: 0.1em solid rgba(47, 38, 225, 0.467);
+  margin: 0.5em 0;
+  border-radius: 0.2em;
+}
+.input-controler input {
+  border: 0;
+  outline: 0;
+  font-size: 1.5em;
+  padding: 0.6em;
+  background-color: transparent;
+  width: 100%;
+}
+.btn,
+.btn-toggle {
+  border: 0;
+  outline: 0;
+  font-size: 1.5em;
+  padding: 0.6em;
+  background-color: #480fe484;
+  width: 100%;
+  border-radius: 0.2em;
+  color: #fff;
+  transition: var(--t-100);
+  cursor: pointer;
+  margin-top: 2em;
+}
+
+.btn:hover {
+  background-color: #480fe49a;
+}
+
+.toggle-contant {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.btn-toggle {
+  padding: 0;
+  width: fit-content;
+  background-color: transparent;
+  color: blue;
+  margin: 0 0.2em 0 0;
+  margin-top: 1em;
+  font-size: 1em;
+  font-weight: 600;
+}
+.form-controls {
+  width: min(100%, 400px);
+  margin-inline: auto;
+  margin-top: 20%;
+}
+
+.form-controls h1 {
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: 400;
+  font-size: 4em;
+}
+/* header */
+header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header .btn {
+  width: fit-content;
+}
+/* profile page */
