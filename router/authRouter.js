@@ -7,9 +7,9 @@ const {
 } = require('../controllers/authController')
 const router = express.Router()
 
-router.get('/', getUser)
+router.get('/user', getUser)
 router.post('/register', registerUser)
 router.post('/login', loginUser)
-router.patch('/update', updateUser)
+router.patch('/:id', updateUser)
 
 module.exports = router

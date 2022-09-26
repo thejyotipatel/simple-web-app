@@ -1,22 +1,43 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import InputCmponent from '../components/InputCmponent'
+import { baseurl } from '../App'
+import axios from 'axios'
 
-function Profile() {
-  const user = {}
-  const isLoading = false
+function Profile({ user, setUser, setErrors, errors }) {
+  const [isLoading, setIsLoading] = useState(false)
 
   const [name, setName] = useState(user?.name)
   const [email, setEmail] = useState(user?.email)
-  const [lastName, setLastName] = useState(user?.lastName)
-  const [location, setLocation] = useState(user?.location)
+  const [password, setPassword] = useState(user?.password)
   const handleSubmit = (e) => {
+    setIsLoading(true)
     e.preventDefault()
-    console.log()
+    if (!email || !password || !name) {
+      console.log('please enter all values')
+      setIsLoading(true)
+
+      return
+    }
+    axios
+      .patch(`${baseurl}/${user.id}`, { name, email, password })
+      .then((res) => {
+        console.log(res.data)
+        setUser(res.data)
+        setIsLoading(false)
+      })
+      .catch((err) => {
+        console.log(err)
+        setIsLoading(false)
+      })
+    setIsLoading(false)
+    // add user to local
+    sessionStorage.setItem('email', email)
+    sessionStorage.setItem('password', password)
   }
   return (
     <div className='container'>
-      <h1>Profile</h1>
-      <form onSubmit={handleSubmit} className='form-control'>
+      <form onSubmit={handleSubmit} className='form-controls'>
+        <h1>Profile</h1>
         {/* {showAlert && <Alert />} */}
         <div className='input-controls'>
           <InputCmponent
@@ -25,13 +46,7 @@ function Profile() {
             value={name}
             handleChange={(e) => setName(e.target.value)}
           />
-          <InputCmponent
-            type='text'
-            labelText='last name'
-            name='lastName'
-            value={lastName}
-            handleChange={(e) => setLastName(e.target.value)}
-          />
+
           <InputCmponent
             type='email'
             name='email'
@@ -40,12 +55,12 @@ function Profile() {
           />
           <InputCmponent
             type='text'
-            name='location'
-            value={location}
-            handleChange={(e) => setLocation(e.target.value)}
+            name='password'
+            value={password}
+            handleChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type='submit' disabled={isLoading}>
+        <button type='submit' className='btn' disabled={isLoading}>
           {isLoading ? 'please wait...' : 'Save changes'}
         </button>
       </form>
